@@ -10,15 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KelompokFaiz">
         <activity
-            android:name=".Angelia"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".Aca"
             android:exported="true">
             <intent-filter>
