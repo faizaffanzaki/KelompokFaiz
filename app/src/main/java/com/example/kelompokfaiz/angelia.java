@@ -3,11 +3,11 @@ package com.example.kelompokfaiz;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Aca extends AppCompatActivity {
+public class angelia extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_aca);
+        setContentView(R.layout.activity_angelia);
     }
 }
