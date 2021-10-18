@@ -1,68 +1,73 @@
 package com.example.kelompokfaiz;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.view.Menu;
+import android.util.Log;
+import android.widget.SearchView;
 
-import com.example.kelompokfaiz.adapter.MovieAdapter;
-import com.example.kelompokfaiz.model.Response;
-import com.example.kelompokfaiz.model.Result;
-import com.example.kelompokfaiz.rest.ApiClient;
-import com.example.kelompokfaiz.rest.ApiInterface;
+import com.example.kelompokfaiz.rest.ApiEndpoint;
+import com.example.kelompokfaiz.rest.ApiService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private MovieAdapter adapter;
+    private final String TAG = "MainActivity";
+
+    private MovieAdapter movieAdapter;
     private SearchView searchView;
-    String API_KEY = "0dde3e9896a8c299d142e214fcb636f8";
-    String LANGUAGE = "en-US";
-    String CATEGORY = "popular";
-    int PAGE = 1;
-    RecyclerView recyclerView;
+    ApiEndpoint endpoint;
+    private RecyclerView recyclerView ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setupView();
+        setupRecylerView();
 
+        getDataFromApi();
+    }
+
+    private void setupView(){
         recyclerView = findViewById(R.id.rvMovie);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        CallRetrofit();
-
     }
 
-    private void CallRetrofit(){
-        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        Call<Response> call = apiInterface.getMovie(CATEGORY,API_KEY,LANGUAGE,PAGE);
-        call.enqueue(new Callback<Response>() {
-            @Override
-            public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
-                List<Result> mList = response.body().getResults();
-                adapter = new MovieAdapter(MainActivity.this, mList);
-                recyclerView.setAdapter(adapter);
-            }
-
-            @Override
-            public void onFailure(Call<Response> call, Throwable t) {
-
-            }
-        });
+    private void setupRecylerView(){
+        List<MainModel.Result> results = new ArrayList<>();
+        movieAdapter = new MovieAdapter(results);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(movieAdapter);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return super.onCreateOptionsMenu(menu);
+    private void getDataFromApi(){
+        ApiService.endpoint().getMovie()
+                .enqueue(new Callback<MainModel>() {
+                    @Override
+                    public void onResponse(Call<MainModel> call, Response<MainModel> response) {
+                        if (response.isSuccessful()){
+                            List<MainModel.Result> results = response.body().getResults();
+                            Log.d(TAG, results.toString());
+                            movieAdapter.setData(results);
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<MainModel> call, Throwable t) {
+                        Log.d(TAG, t.toString());
+
+                    }
+                });
+
     }
 }
