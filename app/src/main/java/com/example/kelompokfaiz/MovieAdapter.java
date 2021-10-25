@@ -9,13 +9,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
-    private List<MainModel.Result> results = new ArrayList<>();
-    public MovieAdapter(List<MainModel.Result> results){
+    private List<MainModel.Result> results;
+    private OnAdapterListener listener;
+
+    public MovieAdapter(List<MainModel.Result> results, OnAdapterListener listener){
         this.results = results;
+        this.listener = listener;
 
     }
     @NonNull
@@ -31,7 +36,16 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         MainModel.Result result = results.get(position);
         holder.tvTitle.setText(result.getTitle());
         holder.tvDescription.setText(result.getOverview());
-
+        Picasso.get()
+                .load(result.getPoster_path())
+                .fit().centerCrop()
+                .into(holder.imgMovie);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onClick(result);
+            }
+        });
     }
 
     @Override
@@ -58,6 +72,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         results.addAll(data);
         notifyDataSetChanged();
 
+    }
+
+    interface OnAdapterListener{
+        void onClick(MainModel.Result result);
     }
 }
 
