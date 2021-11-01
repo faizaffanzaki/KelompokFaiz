@@ -49,9 +49,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(MainModel.Result result) {
   //              Toast.makeText(MainActivity.this, result.getTitle(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this, DetailMovieActivity.class);
-                intent.putExtra("intent_title", result.getTitle());
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
                 intent.putExtra("intent_image", result.getPoster_path());
+                intent.putExtra("intent_title", result.getTitle());
+                intent.putExtra("intent_deskripsi", result.getOverview());
                 startActivity(intent);
             }
         });

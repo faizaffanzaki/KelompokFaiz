@@ -12,11 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KelompokFaiz">
         <activity
-            android:name=".DetailMovieActivity"
-            android:exported="true" />
+            android:name=".DetailActivity"
+            android:exported="true"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.kelompokfaiz.MainActivity"/>
+        </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
+            android:exported="true">
+        </activity>
         <activity
             android:name=".rizka"
             android:exported="true">
