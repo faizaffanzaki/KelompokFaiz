@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -24,9 +25,13 @@ public class MainActivity extends AppCompatActivity {
 
     private final String TAG = "MainActivity";
 
+    String API_KEY = "0dde3e9896a8c299d142e214fcb636f8";
+    String CATEGORY = "popular";
+    String LANGUANGE = "en-US";
+    int page = 1;
+
     private MovieAdapter movieAdapter;
     private SearchView searchView;
-    ApiEndpoint endpoint;
     private RecyclerView recyclerView ;
 
     @Override
@@ -62,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getDataFromApi(){
-        ApiService.endpoint().getMovie()
+        ApiService.endpoint().getMovie(CATEGORY,API_KEY,LANGUANGE,page)
                 .enqueue(new Callback<MainModel>() {
                     @Override
                     public void onResponse(Call<MainModel> call, Response<MainModel> response) {
@@ -80,6 +85,43 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (newText.length() > 1){
+                    ApiService.endpoint().getQuery(API_KEY,LANGUANGE,newText,page)
+                            .enqueue(new Callback<MainModel>() {
+                                @Override
+                                public void onResponse(Call<MainModel> call, Response<MainModel> response) {
+                                    if (response.isSuccessful()){
+                                        List<MainModel.Result> results = response.body().getResults();
+                                        Log.d(TAG, results.toString());
+                                        movieAdapter.setData(results);
+                                    }
+
+                                }
+
+                                @Override
+                                public void onFailure(Call<MainModel> call, Throwable t) {
+                                    Log.d(TAG, t.toString());
+
+                                }
+                            });
+                }
+                return true;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
     }
 }
