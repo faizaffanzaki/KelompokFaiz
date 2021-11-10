@@ -22,13 +22,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     private List<MainModel.Result> results;
     private OnAdapterListener listener;
 
-    public MovieAdapter(List<MainModel.Result> results, OnAdapterListener listener){
+    public MovieAdapter(Context context, List<MainModel.Result> results, OnAdapterListener listener){
         this.results = results;
         this.listener = listener;
         this.context = context;
-
     }
-
     @NonNull
     @Override
     public MovieAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,8 +42,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     public static final String EXTRA_MESSAGE5 = "com.example.kelompokfaiz.MESSAGE5";
 
     @Override
-    public void onBindViewHolder(@NonNull MovieAdapter.ViewHolder holder, int position)
-    {
+    public void onBindViewHolder(@NonNull MovieAdapter.ViewHolder holder, int position) {
+
         String title = results.get(position).getTitle();
         String overview = results.get(position).getOverview();
         String poster = results.get(position).getPoster_path();

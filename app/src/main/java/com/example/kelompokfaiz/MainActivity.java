@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.widget.SearchView;
+import androidx.appcompat.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.kelompokfaiz.rest.ApiEndpoint;
@@ -24,7 +24,6 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     private final String TAG = "MainActivity";
-
     String API_KEY = "0dde3e9896a8c299d142e214fcb636f8";
     String CATEGORY = "popular";
     String LANGUANGE = "en-US";
@@ -40,8 +39,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setupView();
         setupRecylerView();
-
         getDataFromApi();
+
+
     }
 
     private void setupView(){
@@ -50,10 +50,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupRecylerView(){
         List<MainModel.Result> results = new ArrayList<>();
-        movieAdapter = new MovieAdapter(results, new MovieAdapter.OnAdapterListener() {
+        movieAdapter = new MovieAdapter(this, results, new MovieAdapter.OnAdapterListener() {
             @Override
             public void onClick(MainModel.Result result) {
-  //              Toast.makeText(MainActivity.this, result.getTitle(), Toast.LENGTH_SHORT).show();
+                //              Toast.makeText(MainActivity.this, result.getTitle(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
                 intent.putExtra("intent_image", result.getPoster_path());
                 intent.putExtra("intent_title", result.getTitle());
