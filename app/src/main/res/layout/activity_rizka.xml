@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".rizka"
+    android:background="@color/orange">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvMovie"
-        android:layout_width="match_parent"
+    <ImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/item_movie" />
+        android:src="@drawable/icon"
+        android:layout_centerInParent="true"
+        android:padding="25dp"/>
 
 </RelativeLayout>
