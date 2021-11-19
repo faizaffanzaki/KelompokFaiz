@@ -3,4 +3,6 @@
     <string name="search">Search</string>
     <string name="night_mode">Night Mode</string>
     <string name="day_mode">Day Mode</string>
+    <string name="apk">Tentang Aplikasi</string>
+    <string name="penjelasan_apk">MoviePedia adalah sebuah aplikasi yang berisikan daftar-daftar film yang populer. MoviePedia diciptakan bertujuan agar para pencinta film mengetahui film-film yang sedang populer saat ini</string>
 </resources>

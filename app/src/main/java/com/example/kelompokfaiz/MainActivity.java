@@ -13,6 +13,7 @@ import android.view.Menu;
 import androidx.appcompat.widget.SearchView;
 
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.kelompokfaiz.rest.ApiEndpoint;
@@ -159,4 +160,15 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+    private static final String LOG_TAG =
+            MainActivity.class.getSimpleName();
+
+    public void launchSecondActivity(View view) {
+        Log.d(LOG_TAG, "Button clicked!");
+        Intent intent = new Intent(this, tentang_aplikasi.class);
+        startActivity(intent);
+    }
+
+
+
 }
