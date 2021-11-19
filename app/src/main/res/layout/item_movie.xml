@@ -14,22 +14,22 @@
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/imgMovie"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:textSize="16sp"
+        android:layout_marginLeft="18dp"
+        android:layout_toRightOf="@+id/imgMovie"
+        android:text="Judul Movie"
         android:textColor="#000000"
-        android:text="Judul Movie"/>
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tvDescription"
-        android:layout_toRightOf="@+id/imgMovie"
-        android:layout_below="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitle"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="26dp"
+        android:layout_toRightOf="@+id/imgMovie"
         android:maxLines="4"
-        android:text="Ini Deskripsi Movie"/>
+        android:text="Ini Deskripsi Movie" />
 </RelativeLayout>

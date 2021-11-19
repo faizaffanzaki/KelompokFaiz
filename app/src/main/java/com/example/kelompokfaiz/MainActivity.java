@@ -1,6 +1,8 @@
 package com.example.kelompokfaiz;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,6 +11,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import androidx.appcompat.widget.SearchView;
+
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.kelompokfaiz.rest.ApiEndpoint;
@@ -122,6 +126,37 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        return super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.mode, menu);
+        // Change the label of the menu based on the state of the app.
+        int nightMode = AppCompatDelegate.getDefaultNightMode();
+        if(nightMode == AppCompatDelegate.MODE_NIGHT_YES){
+            menu.findItem(R.id.night_mode).setTitle(R.string.day_mode);
+        } else{
+            menu.findItem(R.id.night_mode).setTitle(R.string.night_mode);
+        }
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //Check if the correct item was clicked
+        if (item.getItemId() == R.id.night_mode) {
+        }
+        if (item.getItemId() == R.id.night_mode) {
+            // Get the night mode state of the app.
+            int nightMode = AppCompatDelegate.getDefaultNightMode();
+            //Set the theme mode for the restarted activity
+            if (nightMode == AppCompatDelegate.MODE_NIGHT_YES) {
+                AppCompatDelegate.setDefaultNightMode
+                        (AppCompatDelegate.MODE_NIGHT_NO);
+            } else {
+                AppCompatDelegate.setDefaultNightMode
+                        (AppCompatDelegate.MODE_NIGHT_YES);
+            }
+// Recreate the activity for the theme change to take effect.
+            recreate();
+        }
+        return true;
     }
 }
