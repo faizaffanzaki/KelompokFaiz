@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="25dp"
+    tools:context=".FavoriteActivity">
+
+    <ImageView
+        android:id="@+id/fimgMovie"
+        android:layout_width="150dp"
+        android:layout_height="175dp"
+        android:src="@color/purple_500" />
+
+    <TextView
+        android:id="@+id/ftvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/fimgMovie"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:text="Judul Movie"/>
+
+    <TextView
+        android:id="@+id/ftvDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ftvTitle"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="43dp"
+        android:layout_toRightOf="@+id/fimgMovie"
+        android:maxLines="4"
+        android:text="Ini Deskripsi Movie" />
+
+</RelativeLayout>

@@ -12,7 +12,7 @@
 
     <TextView
         android:id="@+id/tvTitle"
-        android:layout_width="match_parent"
+        android:layout_width="164dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="18dp"
@@ -32,4 +32,14 @@
         android:layout_toRightOf="@+id/imgMovie"
         android:maxLines="4"
         android:text="Ini Deskripsi Movie" />
+
+    <ImageView
+        android:id="@+id/fav_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_toEndOf="@+id/tvTitle"
+        android:layout_toRightOf="@+id/tvTitle"
+        android:src="@drawable/ic_favorite_border_black_24dp" />
 </RelativeLayout>
